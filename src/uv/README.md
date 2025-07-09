@@ -1,6 +1,7 @@
-# uv/uvx (uv)
 
-Tool to replace pip, pip-tools, pipx, poetry, pyenv, virtualenv, and more.
+# uv (uv)
+
+An extremely fast Python package and project manager, written in Rust.
 
 ## Example Usage
 
@@ -14,7 +15,8 @@ Tool to replace pip, pip-tools, pipx, poetry, pyenv, virtualenv, and more.
 
 | Options Id | Description | Type | Default Value |
 |-----|-----|-----|-----|
-| version | Version of UV to install. Accepts versions with 'v' prefix. | string | latest |
+| version | Select the version to install. | string | latest |
+| shellautocompletion | Enable or disable uv and uvx autocompletion. | boolean | false |
 
 
 
