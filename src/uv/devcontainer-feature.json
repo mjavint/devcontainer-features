@@ -1,13 +1,22 @@
 {
-    "name": "uv/uvx",
     "id": "uv",
     "version": "1.0.0",
-    "description": "Tool to replace pip, pip-tools, pipx, poetry, pyenv, virtualenv, and more feature.",
+    "name": "uv",
+    "documentationURL": "http://github.com/mjavint/devcontainers-features/tree/main/src/uv",
+    "description": "An extremely fast Python package and project manager, written in Rust.",
     "options": {
         "version": {
-            "type": "string",
             "default": "latest",
-            "description": "Version of UV to install. Accepts versions with 'v' prefix."
+            "description": "Select the version to install.",
+            "proposals": [
+                "latest"
+            ],
+            "type": "string"
+        },
+        "shellautocompletion": {
+            "default": false,
+            "description": "Enable or disable uv and uvx autocompletion.",
+            "type": "boolean"
         }
     }
 }
