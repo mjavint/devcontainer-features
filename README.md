@@ -1,4 +1,4 @@
-# Dev Container Features: va-h
+# Dev Container Features
 
 * [astral-sh/uv](https://github.com/astral-sh/uv)
 
