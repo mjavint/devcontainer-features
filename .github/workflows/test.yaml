@@ -16,9 +16,11 @@ jobs:
           - uv
           - wkhtmltopdf
         baseImage:
-          - debian:latest
-          - ubuntu:latest
-          - mcr.microsoft.com/devcontainers/base:ubuntu
+          - debian:bookworm
+          - debian:bullseye
+          - ubuntu:jammy
+          - ubuntu:focal
+          - mcr.microsoft.com/devcontainers/base:bookworm
     steps:
       - uses: actions/checkout@v4
 
