@@ -96,12 +96,10 @@ case "${os}" in
         # Set the URL based on the version, architecture and distribution
         if [ "${arch_suffix}" = "arm64" ]; then
             # ARM64 builds
-            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-2/wkhtmltox_${WKHTMLTOPDF_VERSION}-2.${DIST_TAG}_arm64.deb || \
-            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.${DIST_TAG}_arm64.deb
+            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-3/wkhtmltox_${WKHTMLTOPDF_VERSION}-3.${DIST_TAG}_arm64.deb
         else
             # Standard x86_64/i386 builds
-            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-2/wkhtmltox_${WKHTMLTOPDF_VERSION}-2.${DIST_TAG}_${arch_suffix}.deb || \
-            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.${DIST_TAG}_${arch_suffix}.deb
+            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-3/wkhtmltox_${WKHTMLTOPDF_VERSION}-3.${DIST_TAG}_amd64.deb
         fi
 
         # Install the package with dependencies
