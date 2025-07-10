@@ -1,0 +1,16 @@
+{
+    "name": "wkhtmltopdf",
+    "id": "wkhtmltopdf",
+    "version": "1.0.0",
+    "description": "Installs wkhtmltopdf, a command line tool for rendering HTML into PDF and images",
+    "options": {
+        "version": {
+            "type": "string",
+            "default": "0.12.6",
+            "description": "Select version of wkhtmltopdf to install."
+        }
+    },
+    "installsAfter": [
+        "ghcr.io/devcontainers/features/common-utils"
+    ]
+}
