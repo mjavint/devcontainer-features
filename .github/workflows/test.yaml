@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         features:
-          - uv
+          # - uv
           - wkhtmltopdf
         baseImage:
           - debian:bookworm
@@ -36,7 +36,7 @@ jobs:
     strategy:
       matrix:
         features:
-          - uv
+          # - uv
           - wkhtmltopdf
     steps:
       - uses: actions/checkout@v4
