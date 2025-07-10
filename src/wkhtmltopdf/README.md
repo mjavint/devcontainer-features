@@ -7,7 +7,7 @@ This feature installs [wkhtmltopdf](https://wkhtmltopdf.org/), a command line to
 ```json
 "features": {
     "ghcr.io/user/repo/wkhtmltopdf:1": {
-        "version": "0.12.6"
+        "version": "0.12.6.1"
     }
 }
 ```
