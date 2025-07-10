@@ -3,7 +3,7 @@
 set -e
 
 # Import test utils
-source dev-container-features-test-lib
+source ../test-utils/test-utils.sh
 
 # Feature name for the test
 FEATURE_NAME="wkhtmltopdf"
@@ -12,8 +12,11 @@ FEATURE_NAME="wkhtmltopdf"
 check "version" wkhtmltopdf --version
 
 # Test PDF generation functionality
-echo "<h1>Test PDF</h1>" > test.html
-check "generate pdf" bash -c "wkhtmltopdf test.html test.pdf && [ -f test.pdf ]"
+echo "<html><body><h1>Test PDF</h1></body></html>" > test.html
+check "generate pdf" wkhtmltopdf test.html test.pdf
+
+# Check if PDF was created
+check "pdf created" test -f test.pdf
 
 # Clean up test files
 rm -f test.html test.pdf

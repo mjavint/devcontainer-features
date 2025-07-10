@@ -59,16 +59,53 @@ case "${os}" in
         # Download and install wkhtmltopdf
         echo "Installing wkhtmltopdf ${WKHTMLTOPDF_VERSION}..."
 
-        # Set the URL based on the version and architecture
-        if [ "${arch_suffix}" = "arm64" ]; then
-            # ARM64 builds are only available through a specific source
-            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-2/wkhtmltox_${WKHTMLTOPDF_VERSION}-2.bullseye_arm64.deb
-        else
-            # Standard x86_64/i386 builds
-            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-2/wkhtmltox_${WKHTMLTOPDF_VERSION}-2.bullseye_${arch_suffix}.deb
+        # Detect OS version for package selection
+        source /etc/os-release
+        DIST_ID=${ID,,}
+        DIST_VERSION=${VERSION_ID,,}
+
+        # Default to Debian Bullseye if detection fails
+        if [ -z "$DIST_ID" ]; then
+            DIST_ID="debian"
+            DIST_VERSION="11"
         fi
 
-        # Install the package
+        # Determine the distribution package to use
+        if [ "$DIST_ID" = "ubuntu" ]; then
+            if [[ "$DIST_VERSION" == 22.* ]] || [[ "$DIST_VERSION" == 23.* ]] || [[ "$DIST_VERSION" == 24.* ]]; then
+                DIST_TAG="jammy" # Ubuntu 22.04+ use jammy packages
+            elif [[ "$DIST_VERSION" == 20.* ]]; then
+                DIST_TAG="focal" # Ubuntu 20.04 uses focal packages
+            else
+                DIST_TAG="bionic" # Fallback for older versions
+            fi
+        elif [ "$DIST_ID" = "debian" ]; then
+            if [[ "$DIST_VERSION" == 12.* ]] || [[ "$DIST_VERSION" == 13.* ]]; then
+                DIST_TAG="bookworm" # Debian 12+ (bookworm)
+            elif [[ "$DIST_VERSION" == 11.* ]]; then
+                DIST_TAG="bullseye" # Debian 11 (bullseye)
+            else
+                DIST_TAG="buster" # Fallback for older versions
+            fi
+        else
+            DIST_TAG="bullseye" # Default to bullseye for unknown distributions
+        fi
+
+        echo "Detected distribution: ${DIST_ID} ${DIST_VERSION}, using ${DIST_TAG} packages"
+
+        # Set the URL based on the version, architecture and distribution
+        if [ "${arch_suffix}" = "arm64" ]; then
+            # ARM64 builds
+            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-2/wkhtmltox_${WKHTMLTOPDF_VERSION}-2.${DIST_TAG}_arm64.deb || \
+            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.${DIST_TAG}_arm64.deb
+        else
+            # Standard x86_64/i386 builds
+            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-2/wkhtmltox_${WKHTMLTOPDF_VERSION}-2.${DIST_TAG}_${arch_suffix}.deb || \
+            wget -q -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/${WKHTMLTOPDF_VERSION}-1/wkhtmltox_${WKHTMLTOPDF_VERSION}-1.${DIST_TAG}_${arch_suffix}.deb
+        fi
+
+        # Install the package with dependencies
+        apt-get update
         apt-get install -y ./wkhtmltox.deb
         rm wkhtmltox.deb
         ;;
