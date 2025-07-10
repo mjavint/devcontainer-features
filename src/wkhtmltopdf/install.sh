@@ -4,7 +4,7 @@ set -e
 
 # Clean up
 rm -rf /var/lib/apt/lists/*
-WKHTMLTOPDF_VERSION="${VERSION:-"0.12.6"}"
+WKHTMLTOPDF_VERSION="${VERSION:-"0.12.6.1"}"
 
 architecture="$(uname -m)"
 os="$(uname -s)"

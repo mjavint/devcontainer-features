@@ -6,7 +6,7 @@
     "options": {
         "version": {
             "type": "string",
-            "default": "0.12.6",
+            "default": "0.12.6.1",
             "description": "Select version of wkhtmltopdf to install."
         }
     },
