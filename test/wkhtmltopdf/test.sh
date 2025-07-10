@@ -3,7 +3,7 @@
 set -e
 
 # Import test utils
-source ../test-utils/test-utils.sh
+source dev-container-features-test-lib
 
 # Feature name for the test
 FEATURE_NAME="wkhtmltopdf"
