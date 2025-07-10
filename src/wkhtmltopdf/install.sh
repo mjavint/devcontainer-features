@@ -85,10 +85,10 @@ case "${os}" in
             elif [[ "$DIST_VERSION" == 11.* ]]; then
                 DIST_TAG="bullseye" # Debian 11 (bullseye)
             else
-                DIST_TAG="buster" # Fallback for older versions
+                DIST_TAG="bookworm" # Fallback for older versions
             fi
         else
-            DIST_TAG="bullseye" # Default to bullseye for unknown distributions
+            DIST_TAG="bookworm" # Default to bullseye for unknown distributions
         fi
 
         echo "Detected distribution: ${DIST_ID} ${DIST_VERSION}, using ${DIST_TAG} packages"
